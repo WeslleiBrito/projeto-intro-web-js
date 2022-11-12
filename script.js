@@ -136,5 +136,33 @@ const estutantes = [
         parcelas: 500.00
     },  
 ]
+function arredonadaParaCima(valor){
+    
+    const valorInteiro = parseInt(valor)
+    let arredondado = valorInteiro
+
+    if((valor - arredondado < 0.5) && (valor - arredondado > 0)){
+        arredondado = valorInteiro + 0.50
+        return `${String(arredondado).replace('.', ',')}0`
+    }else if(valor > arredondado){
+        return `${arredondado + 1},00`
+    }else{
+        return `${valor},00`
+    }
+}
 
 
+function parelarCurso(parcela, curso, valor){
+    let valorParcela = arredonadaParaCima(valor / parcela)
+
+    if(parcela <= 2){
+        const valorComDesconto = valor * 0.8
+        valorParcela = arredonadaParaCima(valorComDesconto / parcela)
+        console.log(`O curso ${curso} ficou no valor total de R$ ${arredonadaParaCima(valorComDesconto)}. Em ${parcela}x de ${valorParcela} reais. Foi concedido um desconto de 20%`)
+    }else{
+        console.log(`O curso ${curso} ficou no valor total de R$ ${arredonadaParaCima(valor)}. Em ${parcela}x de ${valorParcela} reais.`)
+
+    }
+}
+
+parelarCurso(10, cursos[0].curso, cursos[0].valor)
