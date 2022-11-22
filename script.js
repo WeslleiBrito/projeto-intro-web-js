@@ -1,7 +1,4 @@
-
-
-const cursos = [
-    {
+const cursos = [{
         curso: 'HTML e CSS',
         descricao: 'O curso é voltado para o desenvolvimento frontand',
         duracao: '1 mês',
@@ -23,8 +20,7 @@ const cursos = [
     }
 ]
 
-const turmas = [
-    {
+const turmas = [{
         turma: 'Hipátia',
         curso: 'JavaScript',
         inicio: '30/11/2022',
@@ -105,9 +101,8 @@ const turmas = [
     },
 ]
 
-const estutantes = [
-    {
-        estudante:'Chris Evans',
+const estutantes = [{
+        estudante: 'Chris Evans',
         turma: 'Hipátia',
         curso: 'Javascript',
         valor: 900.00,
@@ -115,9 +110,9 @@ const estutantes = [
         desconto: false,
         parcelas: 100.00
     },
-    
+
     {
-        estudante:'Halle Berry',
+        estudante: 'Halle Berry',
         turma: 'Burnel',
         curso: 'APIsRest',
         valor: 2000.00,
@@ -127,42 +122,76 @@ const estutantes = [
     },
 
     {
-        estudante:'Lashana lynch',
+        estudante: 'Lashana lynch',
         turma: 'Zhenyi',
         curso: 'HTML e CSS',
         valor: 500.00,
         nParcelas: 1,
         desconto: true,
         parcelas: 500.00
-    },  
+    },
 ]
-function arredonadaParaCima(valor){
-    
+
+function arredonadaParaCima(valor) {
+
     const valorInteiro = parseInt(valor)
     let arredondado = valorInteiro
 
-    if((valor - arredondado < 0.5) && (valor - arredondado > 0)){
+    if ((valor - arredondado < 0.5) && (valor - arredondado > 0)) {
         arredondado = valorInteiro + 0.50
         return `${String(arredondado).replace('.', ',')}0`
-    }else if(valor > arredondado){
+    } else if (valor > arredondado) {
         return `${arredondado + 1},00`
-    }else{
+    } else {
         return `${valor},00`
     }
 }
 
 
-function parelarCurso(parcela, curso, valor){
+function parelarCurso(parcela, curso, valor) {
     let valorParcela = arredonadaParaCima(valor / parcela)
 
-    if(parcela <= 2){
+    if (parcela <= 2) {
         const valorComDesconto = valor * 0.8
         valorParcela = arredonadaParaCima(valorComDesconto / parcela)
         console.log(`O curso ${curso} ficou no valor total de R$ ${arredonadaParaCima(valorComDesconto)}. Em ${parcela}x de ${valorParcela} reais. Foi concedido um desconto de 20%`)
-    }else{
+    } else {
         console.log(`O curso ${curso} ficou no valor total de R$ ${arredonadaParaCima(valor)}. Em ${parcela}x de ${valorParcela} reais.`)
 
     }
 }
 
 parelarCurso(10, cursos[0].curso, cursos[0].valor)
+
+function buscarCurso(nomeCurso) {
+
+    for (let curso of cursos) {
+        if (curso.curso === nomeCurso) {
+            return curso
+        }
+    }
+
+    return 'Curso não localizado'
+}
+
+function buscarTurma(nomeTurma) {
+
+    for (let objeto of turmas) {
+        if (objeto.turma === nomeTurma) {
+            return objeto
+        }
+    }
+
+    return 'Turma não localizado'
+}
+
+function buscarEstudante(nomeEstudante) {
+    for (let estudante of estutantes) {
+        if (estudante.estudante === nomeEstudante) {
+            return estudante
+        }
+    }
+
+    return 'Estudante não encontrado'
+}
+console.log(buscarCurso('JavaScrip'))
