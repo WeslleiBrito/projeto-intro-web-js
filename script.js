@@ -147,21 +147,39 @@ function arredonadaParaCima(valor) {
     }
 }
 
+function somarValorArray(arrayDeNumeros) {
+    let soma = 0
 
-function parelarCurso(parcela, curso, valor) {
-    let valorParcela = arredonadaParaCima(valor / parcela)
+    for (valor of arrayDeNumeros) {
+        soma += valor
+    }
+
+    return soma
+}
+
+function parelarCurso(parcela, curso, arrayDeValores) {
+    let valorParcela = arredonadaParaCima(somarValorArray(arrayDeValores) / parcela)
+    let valorComDesconto = somarValorArray(arrayDeValores)
+
+
+    switch (arrayDeValores.length) {
+        case 3:
+            valorComDesconto *= 0.85
+            break
+        case 2:
+            valorComDesconto *= 0.90
+            break
+    }
 
     if (parcela <= 2) {
-        const valorComDesconto = valor * 0.8
+        valorComDesconto = valorComDesconto - somarValorArray(arrayDeValores) * 0.2
         valorParcela = arredonadaParaCima(valorComDesconto / parcela)
-        console.log(`O curso ${curso} ficou no valor total de R$ ${arredonadaParaCima(valorComDesconto)}. Em ${parcela}x de ${valorParcela} reais. Foi concedido um desconto de 20%`)
+        console.log(`O curso ${curso} ficou no valor total de R$ ${arredonadaParaCima(valorComDesconto)}. Em ${parcela}x de ${valorParcela} reais. Foi concedido mais um desconto de 20%, por conta do número de parcela ser menor que 3.`)
     } else {
         console.log(`O curso ${curso} ficou no valor total de R$ ${arredonadaParaCima(valor)}. Em ${parcela}x de ${valorParcela} reais.`)
 
     }
 }
-
-parelarCurso(10, cursos[0].curso, cursos[0].valor)
 
 function buscarCurso(nomeCurso) {
 
@@ -208,4 +226,5 @@ function matricular(nome, curso, turma, numeroDeParcelas) {
     console.log(`\nAluno Matriculado\nNome: ${novoEstudante.estudante}\nCurso: ${novoEstudante.curso}\nTurma: ${novoEstudante.turma}`)
 }
 
-matricular('Wesllei', 'JavaScript', 'Ozemela', 4)
+const carrinhoCursos = [500.00]
+parelarCurso(2, cursos[0].curso, carrinhoCursos)
