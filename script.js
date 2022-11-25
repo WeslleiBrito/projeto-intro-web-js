@@ -194,4 +194,18 @@ function buscarEstudante(nomeEstudante) {
 
     return 'Estudante não encontrado'
 }
-console.log(buscarCurso('JavaScrip'))
+
+function matricular(nome, curso, turma, numeroDeParcelas) {
+    estutantes.push({
+        estudante: nome,
+        curso: curso,
+        turma: turma,
+        nParcelas: numeroDeParcelas
+    })
+
+    console.log(estutantes)
+    const novoEstudante = estutantes[estutantes.length - 1]
+    console.log(`\nAluno Matriculado\nNome: ${novoEstudante.estudante}\nCurso: ${novoEstudante.curso}\nTurma: ${novoEstudante.turma}`)
+}
+
+matricular('Wesllei', 'JavaScript', 'Ozemela', 4)
