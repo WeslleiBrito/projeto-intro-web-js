@@ -193,24 +193,15 @@ function buscarCurso(nomeCurso) {
 }
 
 function buscarTurma(nomeTurma) {
+    const pesquisa = turmas.filter((objeto) => { return objeto.turma === nomeTurma })[0]
 
-    for (let objeto of turmas) {
-        if (objeto.turma === nomeTurma) {
-            return objeto
-        }
-    }
-
-    return 'Turma não localizado'
+    return pesquisa ? pesquisa : 'Turma não encontrada!'
 }
 
 function buscarEstudante(nomeEstudante) {
-    for (let estudante of estutantes) {
-        if (estudante.estudante === nomeEstudante) {
-            return estudante
-        }
-    }
+    const dadosEstudantes = estutantes.filter((objeto) => { return objeto.estudante.includes(nomeEstudante) })[0]
 
-    return 'Estudante não encontrado'
+    return dadosEstudantes ? dadosEstudantes : 'Aluno não encontrado'
 }
 
 function matricular(nome, curso, turma, numeroDeParcelas) {
@@ -230,9 +221,21 @@ function adicionarValoresAoCarrinho(nomeCurso, callback) {
     carrinhoCursos.push(callback(nomeCurso).valor)
 }
 
+function relatorioEstudante(nomeEstudante) {
+    const dadosEstudantes = estutantes.filter((objeto) => { return objeto.estudante === nomeEstudante })[0]
+
+    return `Aluno: ${dadosEstudantes.estudante}\nTurma: ${dadosEstudantes.turma}\nCurso: ${dadosEstudantes.curso}\nValor Total: ${dadosEstudantes.valor}\nValor Parcela: ${dadosEstudantes.parcelas}\nNº Parcelas: ${dadosEstudantes.nParcelas}`
+}
+
+function imprimir(dados) {
+    console.log(dados)
+}
+
 const carrinhoCursos = []
 
-adicionarValoresAoCarrinho('JavaScript', buscarCurso)
-adicionarValoresAoCarrinho('HTML e CSS', buscarCurso)
+// adicionarValoresAoCarrinho('JavaScript', buscarCurso)
+// adicionarValoresAoCarrinho('HTML e CSS', buscarCurso)
 
-parelarCurso(5, cursos[0].curso, carrinhoCursos)
+// parelarCurso(5, cursos[0].curso, carrinhoCursos)
+
+imprimir(buscarEstudante('Halle Berr'))
