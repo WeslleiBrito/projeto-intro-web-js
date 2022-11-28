@@ -183,7 +183,7 @@ function parelarCurso(parcela, curso, arrayDeValores) {
 
 function buscarCurso(nomeCurso) {
 
-    const dadosCurso = cursos.find(valor => valor.curso === nomeCurso)
+    const dadosCurso = cursos.find(objeto => objeto.curso === nomeCurso)
 
     return dadosCurso
 }
