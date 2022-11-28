@@ -183,13 +183,9 @@ function parelarCurso(parcela, curso, arrayDeValores) {
 
 function buscarCurso(nomeCurso) {
 
-    for (let curso of cursos) {
-        if (curso.curso === nomeCurso) {
-            return curso
-        }
-    }
+    const dadosCurso = cursos.find(valor => valor.curso === nomeCurso)
 
-    return 'Curso não localizado'
+    return dadosCurso
 }
 
 function buscarTurma(nomeTurma) {
@@ -238,4 +234,4 @@ const carrinhoCursos = []
 
 // parelarCurso(5, cursos[0].curso, carrinhoCursos)
 
-imprimir(buscarEstudante('Halle Berr'))
+imprimir(buscarCurso('JavaScript'))
