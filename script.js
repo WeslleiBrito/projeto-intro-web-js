@@ -159,24 +159,24 @@ function somarValorArray(arrayDeNumeros) {
 
 function parelarCurso(parcela, curso, arrayDeValores) {
     let valorParcela = arredonadaParaCima(somarValorArray(arrayDeValores) / parcela)
-    let valorComDesconto = somarValorArray(arrayDeValores)
+    let valorTotal = somarValorArray(arrayDeValores)
 
 
     switch (arrayDeValores.length) {
         case 3:
-            valorComDesconto *= 0.85
+            valorTotal *= 0.85
             break
         case 2:
-            valorComDesconto *= 0.90
+            valorTotal *= 0.90
             break
     }
 
     if (parcela <= 2) {
-        valorComDesconto = valorComDesconto - somarValorArray(arrayDeValores) * 0.2
-        valorParcela = arredonadaParaCima(valorComDesconto / parcela)
-        console.log(`O curso ${curso} ficou no valor total de R$ ${arredonadaParaCima(valorComDesconto)}. Em ${parcela}x de ${valorParcela} reais. Foi concedido mais um desconto de 20%, por conta do número de parcela ser menor que 3.`)
+        valorTotal = valorTotal - somarValorArray(arrayDeValores) * 0.2
+        valorParcela = arredonadaParaCima(valorTotal / parcela)
+        console.log(`O curso ${curso} ficou no valor total de R$ ${arredonadaParaCima(valorTotal)}. Em ${parcela}x de ${valorParcela} reais. Foi concedido mais um desconto de 20%, por conta do número de parcela ser menor que 3.`)
     } else {
-        console.log(`O curso ${curso} ficou no valor total de R$ ${arredonadaParaCima(valor)}. Em ${parcela}x de ${valorParcela} reais.`)
+        console.log(`O curso ${curso} ficou no valor total de R$ ${arredonadaParaCima(valorTotal)}. Em ${parcela}x de ${valorParcela} reais.`)
 
     }
 }
@@ -226,5 +226,13 @@ function matricular(nome, curso, turma, numeroDeParcelas) {
     console.log(`\nAluno Matriculado\nNome: ${novoEstudante.estudante}\nCurso: ${novoEstudante.curso}\nTurma: ${novoEstudante.turma}`)
 }
 
-const carrinhoCursos = [500.00]
-parelarCurso(2, cursos[0].curso, carrinhoCursos)
+function adicionarValoresAoCarrinho(nomeCurso, callback) {
+    carrinhoCursos.push(callback(nomeCurso).valor)
+}
+
+const carrinhoCursos = []
+
+adicionarValoresAoCarrinho('JavaScript', buscarCurso)
+adicionarValoresAoCarrinho('HTML e CSS', buscarCurso)
+
+parelarCurso(5, cursos[0].curso, carrinhoCursos)
