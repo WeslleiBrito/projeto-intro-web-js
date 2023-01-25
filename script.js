@@ -189,10 +189,12 @@ function buscarCurso(nomeCurso) {
 }
 
 function buscarTurma(nomeTurma) {
-    const pesquisa = turmas.filter((objeto) => { return objeto.turma === nomeTurma })[0]
+
+    const pesquisa = turmas.filter((objeto) => { return objeto.turma.toLowerCase().includes(nomeTurma.toLowerCase()) })
 
     return pesquisa ? pesquisa : 'Turma não encontrada!'
 }
+
 
 function buscarEstudante(nomeEstudante) {
     const dadosEstudantes = estutantes.filter((objeto) => { return objeto.estudante.includes(nomeEstudante) })[0]
